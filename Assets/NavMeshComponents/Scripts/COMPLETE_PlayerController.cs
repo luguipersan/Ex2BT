@@ -9,26 +9,47 @@ public class COMPLETE_PlayerController : MonoBehaviour
     Vector3 mousePos;
     public Rigidbody rb;
 
+    public GameObject bulletSpawn;
+    public float rateOfFire;
+    public GameObject bullet;
+
     void Update()
     {
+        Plane playerPlane = new Plane(Vector3.up, transform.position);
+        Ray ray = UnityEngine.Camera.main.ScreenPointToRay(Input.mousePosition);
+        float hitDist = 0.0f;
+
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
         if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            Ray ra = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ra, out hit))
             {
                 agent.SetDestination(hit.point);
             }
         }
+
+        if(playerPlane.Raycast(ray, out hitDist))
+        {
+            Vector3 targetPoint = ray.GetPoint(hitDist);
+            Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
+            targetRotation.x = 0;
+            targetRotation.z = 0;
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 7f * Time.deltaTime);
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            Shoot();
+        }
      
     }
 
-    private void FixedUpdate()
+    void Shoot()
     {
-        Vector3 lookDir = mousePos - rb.position;
-        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
-        rb.rotation = angle;
+        Instantiate(bullet.transform, bulletSpawn.transform.position, bulletSpawn.transform.rotation);
     }
+
 }
