@@ -10,10 +10,11 @@ public class PortaBehavior : MonoBehaviour
     public Collider triggerBox;
     public bool isOpening = false;
     public bool playerIsNear = false;
-    public bool isLocked = false;
     public bool isXMovement;
     public bool isClosing = false;
     public bool isClosed = true;
+
+    public bool isLocked = false;
 
     public float timeAberto = 3.0f;
     public float timeParaFechar;
@@ -28,16 +29,10 @@ public class PortaBehavior : MonoBehaviour
 
     // Update is called once per frame
 
-    public void LockDoors()
-    {
-        isLocked = true;
-    }
-
     void Update()
     {
         if (timeStart > 0)
         {
-
             timeStart -= Time.deltaTime;
             playerIsNear = false;
         }
@@ -98,6 +93,13 @@ public class PortaBehavior : MonoBehaviour
                 isClosed = true;
             }
         }
+    }
+
+    public void LockDoors()
+    {
+        Debug.Log(isLocked + " print 1");
+        isLocked = true;
+        Debug.Log(isLocked + " print 2");
     }
 
     private void OnTriggerEnter(Collider other)
