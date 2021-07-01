@@ -26,16 +26,20 @@ public class HunterScript : MonoBehaviour
 
     public GameObject previousPosition;
 
+    PortaBehavior portaControl = new PortaBehavior();
+
     [Task]
     bool CanSeePlayer()
     {
         if (visao == true)
         {
             lastPlayerPos = player.transform.position;
+            Task.current.Succeed();
             return true;
         }
         else
         {
+            Task.current.Fail();
             return false;
         }
     }
@@ -56,7 +60,6 @@ public class HunterScript : MonoBehaviour
             Task.current.Succeed();
         }
     }
-
     [Task]
     void Search()
     {
