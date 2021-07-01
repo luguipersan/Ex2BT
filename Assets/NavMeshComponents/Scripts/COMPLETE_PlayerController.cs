@@ -7,8 +7,7 @@ public class COMPLETE_PlayerController : MonoBehaviour
     [SerializeField]private NavMeshAgent agent;
 
     public Vector3 mousePos;
-    //public Rigidbody rb;
-    public float angledisplay;
+    public Rigidbody rb;
 
     public GameObject bulletSpawn;
     public float rateOfFire;
@@ -50,14 +49,7 @@ public class COMPLETE_PlayerController : MonoBehaviour
 
     void Shoot()
     {
-<<<<<<< Updated upstream
         Instantiate(bullet.transform, bulletSpawn.transform.position, bulletSpawn.transform.rotation);
-=======
-        //Vector3 lookDir = mousePos - rb.position;
-        //float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
-        //angledisplay = angle;
-        //rb.rotation.Set(angle);
->>>>>>> Stashed changes
     }
 
 }
