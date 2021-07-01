@@ -17,6 +17,13 @@ public class SniperScript : MonoBehaviour
     PortaBehavior portaControl = new PortaBehavior();
 
     [Task]
+    void lockDoors()
+    {
+        portaControl.LockDoors();
+        Task.current.Succeed();
+    }
+
+    [Task]
     bool CanSeePlayer()
     {
         if (visao == true)
@@ -36,13 +43,6 @@ public class SniperScript : MonoBehaviour
     [Task]
     void Snipe()
     {
-        Task.current.Succeed();
-    }
-
-    [Task]
-    void LockDoors()
-    {
-        portaControl.LockDoors();
         Task.current.Succeed();
     }
 

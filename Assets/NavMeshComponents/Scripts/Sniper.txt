@@ -12,7 +12,7 @@ tree("Snipe")
 				CanSeePlayer
 				sequence
 					repeat
-						LockDoors
+						lockDoors
 
 tree("Idle")
 	sequence
