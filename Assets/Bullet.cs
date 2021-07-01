@@ -7,6 +7,9 @@ public class Bullet : MonoBehaviour
     public float speed;
     public float maxDistance;
 
+    private GameObject enemyTrigger;
+    public float damage;
+
     void Update()
     {
         transform.Translate(Vector3.forward * Time.deltaTime * speed);
@@ -18,11 +21,19 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider wall)
+    private void OnTriggerEnter(Collider hit)
     {
-        if (wall.gameObject.tag == "Wall")
+        if (hit.gameObject.tag == "Wall")
         {
             Destroy(this.gameObject);
+        }
+
+        if (hit.gameObject.tag == "Enemy")
+        {
+            enemyTrigger = hit.gameObject;
+            enemyTrigger.GetComponent<EnemyDeath>().enemyHealth -= damage;
+            Destroy(this.gameObject);
+            Debug.Log("hit");
         }
     }
 }

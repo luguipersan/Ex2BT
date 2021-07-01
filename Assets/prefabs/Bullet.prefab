@@ -110,3 +110,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
+  maxDistance: 0
+  damage: 1

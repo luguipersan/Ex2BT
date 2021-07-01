@@ -22,6 +22,7 @@ public class SniperScript : MonoBehaviour
         if (visao == true)
         {
             lastPlayerPos = player.transform.position;
+            this.transform.LookAt(player.transform);
             Task.current.Succeed();
             return true;
         }
