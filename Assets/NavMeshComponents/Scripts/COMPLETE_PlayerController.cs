@@ -10,8 +10,14 @@ public class COMPLETE_PlayerController : MonoBehaviour
     public Rigidbody rb;
 
     public GameObject bulletSpawn;
-    public float rateOfFire;
     public GameObject bullet;
+
+    public float playerHealth = 20;
+
+    public float rateOfFire = 1;
+    public float recharge;
+
+    public bool podeAtirar = true;
 
     void Update()
     {
@@ -20,6 +26,12 @@ public class COMPLETE_PlayerController : MonoBehaviour
         float hitDist = 0.0f;
 
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+
+        if (playerHealth <= 0)
+        {
+            gameOver();
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             Ray ra = cam.ScreenPointToRay(Input.mousePosition);
@@ -40,11 +52,33 @@ public class COMPLETE_PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 7f * Time.deltaTime);
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (recharge >= 0)
+        {
+            podeAtirar = false;
+            recharge -= Time.deltaTime;
+        }
+        if (recharge <= 0)
+        {
+            podeAtirar = true;
+        }
+
+        if (Input.GetMouseButtonDown(1) && podeAtirar)
         {
             Shoot();
+            recharge = rateOfFire;
         }
      
+    }
+
+    public void takeDamage(float damage)
+    {
+        playerHealth -= damage;
+    }
+
+    void gameOver()
+    {
+        Debug.Log("Solado");
+        Application.Quit(1);
     }
 
     void Shoot()

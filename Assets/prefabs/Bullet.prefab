@@ -111,4 +111,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 50
   maxDistance: 0
+  Shooter: {fileID: 3268957872363646031, guid: f4619c79c40295c4d9b01cc64ddbd09a, type: 3}
   damage: 1

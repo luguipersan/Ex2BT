@@ -14,6 +14,10 @@ public class HunterScript : MonoBehaviour
 
     public bool visao;
 
+    public GameObject bulletSpawn;
+    public GameObject bullet;
+
+
     public GameObject waypoint1;
     public GameObject waypoint2;
     public GameObject waypoint3;
@@ -26,6 +30,11 @@ public class HunterScript : MonoBehaviour
 
     public GameObject previousPosition;
 
+    public float rateOfFire = 0.1f;
+    public float recharge;
+
+    public bool podeAtirar = true;
+
     PortaBehavior portaControl = new PortaBehavior();
 
     [Task]
@@ -35,6 +44,23 @@ public class HunterScript : MonoBehaviour
         {
             lastPlayerPos = player.transform.position;
             this.transform.LookAt(player.transform);
+
+            if (recharge >= 0)
+            {
+                podeAtirar = false;
+                recharge -= Time.deltaTime;
+            }
+            if (recharge <= 0)
+            {
+                podeAtirar = true;
+            }
+
+            if (podeAtirar)
+            {
+                Atirar();
+                recharge = rateOfFire;
+            }
+
             Task.current.Succeed();
             return true;
         }
@@ -43,6 +69,11 @@ public class HunterScript : MonoBehaviour
             Task.current.Fail();
             return false;
         }
+    }
+
+    void Atirar()
+    {
+        Instantiate(bullet.transform, bulletSpawn.transform.position, bulletSpawn.transform.rotation);
     }
 
     [Task]
@@ -159,7 +190,7 @@ public class HunterScript : MonoBehaviour
     {
         Debug.DrawRay(transform.position, player.transform.position - transform.position, Color.red);
         
-        if (Physics.Raycast(transform.position, player.transform.position - transform.position, out RaycastHit hit, 30) && hit.collider.CompareTag("Player"))
+        if (Physics.Raycast(transform.position, player.transform.position - transform.position, out RaycastHit hit, 120) && hit.collider.CompareTag("Player"))
         {
             visao = true;
         }

@@ -262,8 +262,10 @@ MonoBehaviour:
   mousePos: {x: 0, y: 0, z: 0}
   rb: {fileID: 81888509}
   bulletSpawn: {fileID: 2054226882}
-  rateOfFire: 0
   bullet: {fileID: 7282530990080164567, guid: ced3d909957d175498fe1fff41f0a26f, type: 3}
+  rateOfFire: 1
+  recharge: 0
+  podeAtirar: 1
 --- !u!54 &81888509
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3132,6 +3134,8 @@ MonoBehaviour:
   speed: 1
   Display: {x: 0, y: 0, z: 0}
   visao: 0
+  bulletSpawn: {fileID: 1896353086}
+  bullet: {fileID: 4661702551977718598, guid: 9cd5abd2eead8df4c903add0153d5f6d, type: 3}
   waypoint1: {fileID: 223730614}
   waypoint2: {fileID: 1609502498}
   waypoint3: {fileID: 1931707609}
@@ -3140,6 +3144,9 @@ MonoBehaviour:
   randomPosition2: {fileID: 1161650925}
   previousRandomPosition: {fileID: 1261432875}
   previousPosition: {fileID: 223730614}
+  rateOfFire: 0.1
+  recharge: 0
+  podeAtirar: 1
 --- !u!114 &909019375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3867,10 +3874,10 @@ MonoBehaviour:
   triggerBox: {fileID: 1188866629}
   isOpening: 0
   playerIsNear: 0
-  isLocked: 0
   isXMovement: 1
   isClosing: 0
   isClosed: 1
+  isLocked: 0
   timeAberto: 3
   timeParaFechar: 0
   timeFechado: 3
@@ -4797,10 +4804,10 @@ MonoBehaviour:
   triggerBox: {fileID: 1434574645}
   isOpening: 0
   playerIsNear: 0
-  isLocked: 0
   isXMovement: 1
   isClosing: 0
   isClosed: 1
+  isLocked: 0
   timeAberto: 3
   timeParaFechar: 0
   timeFechado: 3
