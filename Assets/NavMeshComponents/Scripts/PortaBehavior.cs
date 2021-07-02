@@ -32,7 +32,7 @@ public class PortaBehavior : MonoBehaviour
 
     void Update()
     {
-        isLocked = sniper.GetComponent<SniperScript>().isLocked;
+        //isLocked = sniper.GetComponent<SniperScript>().isLocked;
         if (timeStart > 0)
         {
             timeStart -= Time.deltaTime;

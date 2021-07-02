@@ -14,7 +14,18 @@ public class SniperScript : MonoBehaviour
 
     public bool visao;
 
+
     public bool isLocked = false;
+    public GameObject bulletSpawn;
+    public GameObject bullet;
+
+    PortaBehavior portaControl = new PortaBehavior();
+
+    public float rateOfFire = 0.1f;
+    public float recharge;
+
+    public bool podeAtirar = true;
+
 
     [Task]
     void lockDoors()
@@ -29,6 +40,23 @@ public class SniperScript : MonoBehaviour
         {
             lastPlayerPos = player.transform.position;
             this.transform.LookAt(player.transform);
+
+            if (recharge >= 0)
+            {
+                podeAtirar = false;
+                recharge -= Time.deltaTime;
+            }
+            if (recharge <= 0)
+            {
+                podeAtirar = true;
+            }
+
+            if (podeAtirar)
+            {
+                Atirar();
+                recharge = rateOfFire;
+            }
+
             Task.current.Succeed();
             return true;
         }
@@ -37,6 +65,10 @@ public class SniperScript : MonoBehaviour
             Task.current.Fail();
             return false;
         }
+    }
+    void Atirar()
+    {
+        Instantiate(bullet.transform, bulletSpawn.transform.position, bulletSpawn.transform.rotation);
     }
 
     [Task]
