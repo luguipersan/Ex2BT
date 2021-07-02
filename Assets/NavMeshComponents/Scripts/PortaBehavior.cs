@@ -7,6 +7,7 @@ public class PortaBehavior : MonoBehaviour
     public GameObject portaParaAbrir;
     public GameObject posicaoParaAbrir;
     public GameObject posicaoParaFechar;
+    public GameObject sniper;
     public Collider triggerBox;
     public bool isOpening = false;
     public bool playerIsNear = false;
@@ -31,6 +32,7 @@ public class PortaBehavior : MonoBehaviour
 
     void Update()
     {
+        isLocked = sniper.GetComponent<SniperScript>().isLocked;
         if (timeStart > 0)
         {
             timeStart -= Time.deltaTime;
@@ -39,6 +41,7 @@ public class PortaBehavior : MonoBehaviour
         if (isLocked)
         {
             timeParaDestrancar -= Time.deltaTime;
+            isClosing = true;
             if (timeParaDestrancar <= 0)
             {
                 isLocked = false;
@@ -95,12 +98,6 @@ public class PortaBehavior : MonoBehaviour
         }
     }
 
-    public void LockDoors()
-    {
-        Debug.Log(isLocked + " print 1");
-        isLocked = true;
-        Debug.Log(isLocked + " print 2");
-    }
 
     private void OnTriggerEnter(Collider other)
     {

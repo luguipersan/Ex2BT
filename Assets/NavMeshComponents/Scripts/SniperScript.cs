@@ -14,12 +14,11 @@ public class SniperScript : MonoBehaviour
 
     public bool visao;
 
-    PortaBehavior portaControl = new PortaBehavior();
+    public bool isLocked = false;
 
     [Task]
     void lockDoors()
     {
-        portaControl.LockDoors();
         Task.current.Succeed();
     }
 
